@@ -27,3 +27,7 @@ ccs:
 
 fcs:
 	@docker exec -e PHP_ENV=test -it $(APP) composer fcs
+
+### DATA FIXTURES ###
+fixtures:
+	@docker exec -e PHP_ENV=test -it $(APP) php bin/console doctrine:fixtures:load -n
