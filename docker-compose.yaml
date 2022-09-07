@@ -7,14 +7,45 @@ services:
             dockerfile: .docker/php/Dockerfile
         container_name: blue-example-app
         environment:
-            - APP_ENV=dev
-            - APP_DEBUG=1
+            APP_ENV: dev
+            APP_DEBUG: 1
+            TZ: Europe/Prague
         volumes:
             - ./:/var/www/html
         ports:
             - "8080:80"
         networks:
             - blue-example
+        
+    database:
+        image: mariadb:10.8.4
+        container_name: blue-example-database
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: blue-example
+            MYSQL_USER: user
+            MYSQL_PASSWORD: user
+            TZ: Europe/Prague
+        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        volumes:
+            - db-data:/var/lib/mysql
+        networks:
+            - blue-example
+
+    adminer:
+        image: dockette/adminer:dg
+        container_name: blue-example-adminer
+        restart: always
+        depends_on:
+            - database
+        ports:
+            - "8000:80"
+        networks:
+            - blue-example
 
 networks:
     blue-example:
+
+volumes:
+    db-data:
