@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -11,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController
 {
     public function __construct(
-        private ContactService $contactService
+        private ContactService $contactService,
     ) {
     }
 
@@ -43,7 +44,7 @@ class ContactController extends AbstractController
             'app_contact_edit',
             [
                 'username' => $contact->getUsername(),
-            ]
+            ],
         );
     }
 

@@ -20,13 +20,12 @@ class ContactBusiness
         string $username,
         ?string $phone,
         ?string $note,
-    ): Contact
-    {
+    ): Contact {
         $contact = new Contact(
             $name,
-         $surname,
-        $email,
-        $username,
+            $surname,
+            $email,
+            $username,
         );
 
         $contact->changePhone($phone)

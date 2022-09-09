@@ -49,8 +49,7 @@ class ContactService
         string $username,
         ?string $phone,
         ?string $note,
-    ): Contact
-    {
+    ): Contact {
         return $this->contactBusiness->create(
             $name,
             $surname,
@@ -68,8 +67,7 @@ class ContactService
         string $email,
         ?string $phone,
         ?string $note,
-    ): Contact
-    {
+    ): Contact {
         return $this->contactBusiness->update(
             $contact,
             $name,
