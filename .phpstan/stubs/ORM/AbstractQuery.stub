@@ -1,0 +1,24 @@
+<?php
+
+namespace Doctrine\ORM;
+
+use Doctrine\Common\Collections\ArrayCollection;
+
+abstract class AbstractQuery
+{
+	/**
+	 * @phpstan-ignore-next-line
+     */
+    public function getResult($hydrationMode = self::HYDRATE_OBJECT)
+    {
+
+    }
+
+    /**
+     * @phpstan-ignore-next-line
+     */
+    public function getOneOrNullResult($hydrationMode = null)
+    {
+
+    }
+}

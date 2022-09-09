@@ -27,6 +27,11 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "fakerphp/faker": "^1.20",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan": "^1.8",
+        "phpstan/phpstan-doctrine": "^1.3",
+        "phpstan/phpstan-strict-rules": "^1.4",
+        "phpstan/phpstan-symfony": "^1.2",
         "symfony/maker-bundle": "^1.45",
         "symfony/stopwatch": "6.1.*",
         "symfony/web-profiler-bundle": "6.1.*"
@@ -35,7 +40,8 @@
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "phpstan/extension-installer": true
         },
         "optimize-autoloader": true,
         "preferred-install": {
@@ -72,6 +78,13 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "phpstan": [
+            "bin/console cache:warmup --env=test",
+            "phpstan analyse -c phpstan.neon --no-progress --memory-limit 1G"
+        ],
+        "ci": [
+            "@phpstan"
         ]
     },
     "conflict": {

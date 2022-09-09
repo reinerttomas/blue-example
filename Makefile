@@ -20,13 +20,16 @@ app:
 ### ANALYSIS ###
 
 phpstan:
-	@docker exec -e PHP_ENV=test -it $(APP) composer phpstan
+	@docker exec -e APP_ENV=test -it $(APP) composer phpstan
 
 ccs:
 	@docker exec -e PHP_ENV=test -it $(APP) composer ccs
 
 fcs:
 	@docker exec -e PHP_ENV=test -it $(APP) composer fcs
+
+ci:
+	@docker exec -e APP_ENV=test -it $(APP) composer ci
 
 ### DATA FIXTURES ###
 fixtures:
