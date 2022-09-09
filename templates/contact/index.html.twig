@@ -5,7 +5,10 @@
 {% block body %}
     <div class="container">
         <div class="mt-5">
-            <h1>Contacts</h1>
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h1>Contacts</h1>
+                <a class="btn btn-primary" href="{{ url('app_contact_create') }}">Create</a>
+            </div>
             <table class="table">
                 <thead>
                     <tr>
@@ -29,7 +32,10 @@
                             <td>{{ contact.username }}</td>
                             <td>{{ contact.phone }}</td>
                             <td>{{ contact.createdAt|date('d.m.Y H:i') }}</td>
-                            <td></td>
+                            <td>
+                                <a href="{{ url('app_contact_edit', { username: contact.username }) }}">Edit</a>
+                                <a href="{{ url('app_contact_delete', { id: contact.id }) }}">Delete</a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

@@ -6,6 +6,8 @@ namespace App\Service;
 use App\Business\ContactBusiness;
 use App\Entity\Contact;
 use App\Exception\NotFoundException;
+use App\Exception\UniqueException;
+use App\Form\Dto\ContactDto;
 use App\Repository\ContactRepository;
 use Doctrine\ORM\NonUniqueResultException;
 
@@ -42,39 +44,33 @@ class ContactService
         return $this->contactRepository->getByUsername($username);
     }
 
-    public function create(
-        string $name,
-        string $surname,
-        string $email,
-        string $username,
-        ?string $phone,
-        ?string $note,
-    ): Contact {
+    /**
+     * @throws UniqueException
+     */
+    public function create(ContactDto $contactDto): Contact
+    {
         return $this->contactBusiness->create(
-            $name,
-            $surname,
-            $email,
-            $username,
-            $phone,
-            $note,
+            $contactDto->name,
+            $contactDto->surname,
+            $contactDto->email,
+            $contactDto->username,
+            $contactDto->phone,
+            $contactDto->note,
         );
     }
 
-    public function update(
-        Contact $contact,
-        string $name,
-        string $surname,
-        string $email,
-        ?string $phone,
-        ?string $note,
-    ): Contact {
+    /**
+     * @throws UniqueException
+     */
+    public function update(Contact $contact, ContactDto $contactDto): Contact
+    {
         return $this->contactBusiness->update(
             $contact,
-            $name,
-            $surname,
-            $email,
-            $phone,
-            $note,
+            $contactDto->name,
+            $contactDto->surname,
+            $contactDto->email,
+            $contactDto->phone,
+            $contactDto->note,
         );
     }
 

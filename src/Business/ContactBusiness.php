@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Business;
 
 use App\Entity\Contact;
+use App\Exception\UniqueException;
 use App\Repository\ContactRepository;
 
 class ContactBusiness
@@ -13,6 +14,9 @@ class ContactBusiness
     ) {
     }
 
+    /**
+     * @throws UniqueException
+     */
     public function create(
         string $name,
         string $surname,
@@ -34,6 +38,9 @@ class ContactBusiness
         return $this->contactRepository->store($contact);
     }
 
+    /**
+     * @throws UniqueException
+     */
     public function update(
         Contact $contact,
         string $name,
